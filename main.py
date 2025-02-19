@@ -49,6 +49,22 @@ class Spacecraft:
 
     #moves our objects
     def move(self, planet = None):
+        # calcs distances between the two bodies and force of gravitational attraction
+        distance = math.sqrt((self.x - planet.x) ** 2 + (self.y - planet.y) ** 2)
+        force = (G * self.mass * planet.mass) / distance ** 2
+
+        # calcs acceleration and angle theta
+        acc = force / self.mass
+        angle = math.atan2(planet.y - self.y, planet.x - self.x)
+
+        # calcs acceleration of each direction (x, y)
+        acc_x = acc * math.cos(angle)
+        acc_y = acc * math.sin(angle)
+
+        # applies acceleration to velocity(wrong way tho)
+        self.vel_x += acc_x
+        self.vel_y += acc_y
+
         self.x += self.vel_x
         self.y += self.vel_y
 
@@ -115,12 +131,13 @@ def main():
         # calls instance method draw for every object
         for obj in objects[:]:  # [:] makes copy of objects and uses it to iterate
                 obj.draw()
-                obj.move()
+                obj.move(planet)
                 off_screen = obj.x < 0 or obj.x > WIDTH or obj.y < 0 or obj.y > HEIGHT #checks if ship moves out of screen
                 
                 # when ship collides with planet
                 collided = math.sqrt((obj.x - planet.x) ** 2 + (obj.y - planet.y) ** 2) <= PLANET_RADIUS
 
+                # removes objects when off-screen or collided
                 if off_screen or collided:
                     objects.remove(obj)
               
