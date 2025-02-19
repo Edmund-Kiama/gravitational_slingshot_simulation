@@ -12,7 +12,7 @@ pygame.display.set_caption("Gravitational Slingshot Effect")
 
 #planet dimension set-up
 PLANET_MASS = 100
-SHIP_MASS = 5
+ASTEROID_MASS = 5
 G = 5
 FPS = 60
 PLANET_RADIUS = 50
@@ -72,14 +72,14 @@ class Spacecraft:
     def draw(self):
         pygame.draw.circle(window, RED,(int(self.x), int(self.y)), OBJ_SIZE) 
 
-def create_ship(location, mouse):
+def create_asteroid(location, mouse):
     t_x, t_y = location
     m_x, m_y = mouse
 
     vel_x = (m_x - t_x) / VEL_SCALE
     vel_y = (m_y - t_y) / VEL_SCALE
 
-    obj = Spacecraft(t_x, t_y, vel_x, vel_y, SHIP_MASS)
+    obj = Spacecraft(t_x, t_y, vel_x, vel_y, ASTEROID_MASS)
 
     return obj
 
@@ -114,9 +114,9 @@ def main():
                 if temp_obj_pos:
                     #preps to launch
                     t_x, t_y = temp_obj_pos
-                    obj = create_ship(temp_obj_pos, mouse_pos)
+                    obj = create_asteroid(temp_obj_pos, mouse_pos)
                     objects.append(obj)
-                    temp_obj_pos = None #releases the spaceship
+                    temp_obj_pos = None #releases the asteroid
 
                 else:
                     temp_obj_pos = mouse_pos
@@ -132,9 +132,9 @@ def main():
         for obj in objects[:]:  # [:] makes copy of objects and uses it to iterate
                 obj.draw()
                 obj.move(planet)
-                off_screen = obj.x < 0 or obj.x > WIDTH or obj.y < 0 or obj.y > HEIGHT #checks if ship moves out of screen
+                off_screen = obj.x < 0 or obj.x > WIDTH or obj.y < 0 or obj.y > HEIGHT #checks if asteroid moves out of screen
                 
-                # when ship collides with planet
+                # when asteroid collides with planet
                 collided = math.sqrt((obj.x - planet.x) ** 2 + (obj.y - planet.y) ** 2) <= PLANET_RADIUS
 
                 # removes objects when off-screen or collided
