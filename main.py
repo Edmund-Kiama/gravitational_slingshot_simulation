@@ -116,9 +116,12 @@ def main():
         for obj in objects[:]:  # [:] makes copy of objects and uses it to iterate
                 obj.draw()
                 obj.move()
-
                 off_screen = obj.x < 0 or obj.x > WIDTH or obj.y < 0 or obj.y > HEIGHT #checks if ship moves out of screen
-                if off_screen:
+                
+                # when ship collides with planet
+                collided = math.sqrt((obj.x - planet.x) ** 2 + (obj.y - planet.y) ** 2) <= PLANET_RADIUS
+
+                if off_screen or collided:
                     objects.remove(obj)
               
         planet.draw()
