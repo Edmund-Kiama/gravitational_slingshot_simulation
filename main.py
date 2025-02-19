@@ -22,6 +22,7 @@ VEL_SCALE = 100
 #setting the images
 BG = pygame.transform.scale(pygame.image.load("background.jpg"), (WIDTH, HEIGHT))
 PLANET = pygame.transform.scale(pygame.image.load("earth.png"), (PLANET_RADIUS * 2, PLANET_RADIUS * 2))
+ASTEROID = pygame.transform.scale(pygame.image.load("asteroid.png"), (PLANET_RADIUS / 3, PLANET_RADIUS / 3))
 
 #setting the color
 WHITE = (255, 255, 255)
@@ -39,7 +40,7 @@ class Planet:
         window.blit(PLANET, (self.x - PLANET_RADIUS, self.y - PLANET_RADIUS)) #draws at the center
 
 
-class Spacecraft:
+class Asteroid:
     def __init__(self, x, y, vel_x, vel_y, mass):
         self.x = x
         self.y = y
@@ -70,7 +71,8 @@ class Spacecraft:
 
     #draws our objects
     def draw(self):
-        pygame.draw.circle(window, RED,(int(self.x), int(self.y)), OBJ_SIZE) 
+        window.blit(ASTEROID, (int(self.x), int(self.y)))
+        # pygame.draw.circle(window, RED,(int(self.x), int(self.y)), OBJ_SIZE) 
 
 def create_asteroid(location, mouse):
     t_x, t_y = location
@@ -79,7 +81,8 @@ def create_asteroid(location, mouse):
     vel_x = (m_x - t_x) / VEL_SCALE
     vel_y = (m_y - t_y) / VEL_SCALE
 
-    obj = Spacecraft(t_x, t_y, vel_x, vel_y, ASTEROID_MASS)
+    obj = Asteroid(t_x, t_y, vel_x, vel_y, ASTEROID_MASS)
+    # obj = Asteroid(m_x, m_y, vel_x, vel_y, ASTEROID_MASS)
 
     return obj
 
