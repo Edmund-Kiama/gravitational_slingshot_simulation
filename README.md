@@ -11,6 +11,7 @@ When a spacecraft passes close to a massive planet, the planet's gravity bends i
 The challenge this project addresses is: **how do we visually and interactively simulate the effect of gravitational attraction on a moving body in 2D space?**
 
 This simulation allows a user to:
+
 - Launch asteroids from any position on screen
 - Observe how the planet's gravity bends, accelerates, or traps the asteroid's path
 - Experiment with different launch angles and velocities to achieve orbital or slingshot trajectories
@@ -22,16 +23,19 @@ This simulation allows a user to:
 The simulation is grounded in **Newtonian gravitational mechanics**:
 
 ### Gravitational Force
+
 ```
 F = G * m1 * m2 / r²
 ```
 
 Where:
+
 - `G` — Gravitational constant (set to `5` for simulation scale)
 - `m1`, `m2` — Masses of the planet and asteroid
 - `r` — Distance between the two bodies
 
 ### Acceleration
+
 ```
 a = F / m
 ```
@@ -55,18 +59,20 @@ Ensure you have the following installed before running the simulation:
 - **Pygame** — Install via pip:
 
 ```bash
-pip install pygame
+pip install pipenv  
+pipenv shell 
+pipenv install
 ```
 
 ### Required Asset Files
 
 Place the following image files in the **same directory** as the script:
 
-| File | Description |
-|------|-------------|
-| `background.jpg` | Space/starfield background image |
-| `earth.png` | Planet sprite (rendered at 100×100 px) |
-| `asteroid.png` | Asteroid sprite (rendered at ~17×17 px) |
+| File             | Description                             |
+| ---------------- | --------------------------------------- |
+| `background.jpg` | Space/starfield background image        |
+| `earth.png`      | Planet sprite (rendered at 100×100 px)  |
+| `asteroid.png`   | Asteroid sprite (rendered at ~17×17 px) |
 
 > **Note:** The images must exist in the working directory or the program will crash on launch. Any appropriately sized PNG/JPG images can be used.
 
@@ -79,19 +85,19 @@ Place the following image files in the **same directory** as the script:
 3. Run the script:
 
 ```bash
-python gravitational_slingshot.py
+python main.py
 ```
 
 ---
 
 ## 🎮 How to Use
 
-| Action | Description |
-|--------|-------------|
-| **First click** | Sets the starting position of the asteroid |
-| **Move mouse** | A line preview shows the launch direction and velocity |
+| Action           | Description                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------------- |
+| **First click**  | Sets the starting position of the asteroid                                                  |
+| **Move mouse**   | A line preview shows the launch direction and velocity                                      |
 | **Second click** | Launches the asteroid toward the initial click point with velocity scaled to mouse distance |
-| **Close window** | Exits the simulation |
+| **Close window** | Exits the simulation                                                                        |
 
 The further your mouse is from the starting point when you click, the faster the asteroid will be launched.
 
@@ -113,15 +119,15 @@ The further your mouse is from the starting point when you click, the faster the
 
 Key simulation parameters are defined at the top of the file and can be tuned:
 
-| Constant | Default | Description |
-|----------|---------|-------------|
-| `WIDTH`, `HEIGHT` | `800, 600` | Window dimensions in pixels |
-| `PLANET_MASS` | `100` | Mass of the central planet |
-| `ASTEROID_MASS` | `5` | Mass of each launched asteroid |
-| `G` | `5` | Gravitational constant (scaled for simulation) |
-| `FPS` | `60` | Frames per second |
-| `PLANET_RADIUS` | `50` | Planet's collision/visual radius |
-| `VEL_SCALE` | `100` | Divides mouse distance to determine launch speed |
+| Constant          | Default    | Description                                      |
+| ----------------- | ---------- | ------------------------------------------------ |
+| `WIDTH`, `HEIGHT` | `800, 600` | Window dimensions in pixels                      |
+| `PLANET_MASS`     | `100`      | Mass of the central planet                       |
+| `ASTEROID_MASS`   | `5`        | Mass of each launched asteroid                   |
+| `G`               | `5`        | Gravitational constant (scaled for simulation)   |
+| `FPS`             | `60`       | Frames per second                                |
+| `PLANET_RADIUS`   | `50`       | Planet's collision/visual radius                 |
+| `VEL_SCALE`       | `100`      | Divides mouse distance to determine launch speed |
 
 ---
 
@@ -129,7 +135,7 @@ Key simulation parameters are defined at the top of the file and can be tuned:
 
 ```
 gravitational-slingshot/
-├── gravitational_slingshot.py   # Main simulation script
+├── main.py   # Main simulation script
 ├── background.jpg               # Background image asset
 ├── earth.png                    # Planet image asset
 ├── asteroid.png                 # Asteroid image asset
